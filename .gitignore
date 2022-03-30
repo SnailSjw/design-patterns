@@ -1,4 +1,5 @@
 /simplefactory/target/
-/.idea/
-/simple-factory-pattern/target/
-/factory-method-pattern/target/
+.idea/
+/target/*
+target/
+*.iml

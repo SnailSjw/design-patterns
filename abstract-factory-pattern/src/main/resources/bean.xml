@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans>
+    <bean id="spring" class="com.snail.abstractfactory.demo1.factory.SpringSkinFactory"/>
+    <bean id="summer" class="com.snail.abstractfactory.demo1.factory.SummerSkinFactory"/>
+</beans>

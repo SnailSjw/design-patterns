@@ -11,6 +11,7 @@
     <modules>
         <module>simple-factory-pattern</module>
         <module>factory-method-pattern</module>
+        <module>abstract-factory-pattern</module>
     </modules>
 
     <properties>
