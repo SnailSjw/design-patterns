@@ -9,7 +9,8 @@
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
-        <module>simplefactory</module>
+        <module>simple-factory-pattern</module>
+        <module>factory-method-pattern</module>
     </modules>
 
     <properties>

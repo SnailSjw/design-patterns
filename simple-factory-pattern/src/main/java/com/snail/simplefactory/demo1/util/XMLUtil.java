@@ -22,7 +22,7 @@ public class XMLUtil {
         try {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse(new File("D:\\IdeaProjects\\design-pattern\\simplefactory\\src\\main\\resources\\args.xml"));//
+            Document document = documentBuilder.parse(new File("simple-factory-pattern/src/main/resources/args.xml"));
 
             // 解析xml获取参数
             NodeList nodeList = document.getElementsByTagName("chartType");

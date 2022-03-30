@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans>
+    <bean id = "fileLogger" class="com.snail.factorymethod.demo4.FileLoggerFactory"></bean>
+    <bean id="benz" class="com.snail.factorymethod.exercise.BenzFactory"></bean>
+</beans>

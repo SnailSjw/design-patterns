@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.snail.factorymethod.demo1.Client</OriginalElement>
+  <nodes>
+    <node x="308.71875" y="-46.0">com.snail.factorymethod.demo1.Logger</node>
+    <node x="177.5" y="425.0">com.snail.factorymethod.demo1.Client</node>
+    <node x="440.19791666666663" y="240.5">com.snail.factorymethod.demo1.DatabaseLoggerFactory</node>
+    <node x="-85.83333333333334" y="112.0">com.snail.factorymethod.demo1.FileLogger</node>
+    <node x="473.99999999999994" y="106.0">com.snail.factorymethod.demo1.DatabaseLogger</node>
+    <node x="181.9375" y="118.0">com.snail.factorymethod.demo1.LoggerFactory</node>
+    <node x="-49.0" y="270.0">com.snail.factorymethod.demo1.FileLoggerFactory</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.snail.factorymethod.demo1.FileLoggerFactory" target="com.snail.factorymethod.demo1.FileLogger" relationship="CREATE">
+      <point x="-61.33333333333334" y="-40.0" />
+      <point x="0.0" y="40.0" />
+    </edge>
+    <edge source="com.snail.factorymethod.demo1.FileLogger" target="com.snail.factorymethod.demo1.Logger" relationship="REALIZATION">
+      <point x="0.0" y="-40.0" />
+      <point x="-18.333333333333343" y="37.0" />
+      <point x="342.46875" y="37.0" />
+      <point x="-33.75" y="28.0" />
+    </edge>
+    <edge source="com.snail.factorymethod.demo1.Client" target="com.snail.factorymethod.demo1.Logger" relationship="DEPENDENCY">
+      <point x="51.66666666666663" y="-40.0" />
+      <point x="306.66666666666663" y="344.0" />
+      <point x="727.4375" y="344.0" />
+      <point x="727.4375" y="54.0" />
+      <point x="409.96875" y="54.0" />
+      <point x="33.75" y="28.0" />
+    </edge>
+    <edge source="com.snail.factorymethod.demo1.DatabaseLogger" target="com.snail.factorymethod.demo1.Logger" relationship="REALIZATION">
+      <point x="0.0" y="-40.0" />
+      <point x="560.0" y="87.0" />
+      <point x="391.0" y="87.0" />
+      <point x="391.0" y="10.0" />
+      <point x="-33.75" y="28.0" />
+    </edge>
+    <edge source="com.snail.factorymethod.demo1.Client" target="com.snail.factorymethod.demo1.LoggerFactory" relationship="DEPENDENCY">
+      <point x="0.0" y="-40.0" />
+      <point x="255.0" y="174.0" />
+      <point x="45.0" y="28.0" />
+    </edge>
+    <edge source="com.snail.factorymethod.demo1.DatabaseLoggerFactory" target="com.snail.factorymethod.demo1.Logger" relationship="DEPENDENCY">
+      <point x="75.33333333333337" y="-40.0" />
+      <point x="628.53125" y="296.5" />
+      <point x="678.4375" y="296.5" />
+      <point x="678.4375" y="76.0" />
+      <point x="409.96875" y="76.0" />
+      <point x="33.75" y="28.0" />
+    </edge>
+    <edge source="com.snail.factorymethod.demo1.DatabaseLoggerFactory" target="com.snail.factorymethod.demo1.DatabaseLogger" relationship="CREATE">
+      <point x="-75.33333333333331" y="-40.0" />
+      <point x="440.93229166666663" y="240.5" />
+      <point x="440.93229166666663" y="296.5" />
+      <point x="560.0" y="296.5" />
+      <point x="0.0" y="40.0" />
+    </edge>
+    <edge source="com.snail.factorymethod.demo1.DatabaseLoggerFactory" target="com.snail.factorymethod.demo1.LoggerFactory" relationship="REALIZATION">
+      <point x="0.0" y="-40.0" />
+      <point x="553.1979166666666" y="280.5" />
+      <point x="338.9375" y="280.5" />
+      <point x="338.9375" y="174.0" />
+      <point x="-45.0" y="28.0" />
+    </edge>
+    <edge source="com.snail.factorymethod.demo1.Client" target="com.snail.factorymethod.demo1.FileLoggerFactory" relationship="CREATE">
+      <point x="-51.66666666666663" y="-40.0" />
+      <point x="203.33333333333337" y="446.0" />
+      <point x="43.0" y="446.0" />
+      <point x="0.0" y="40.0" />
+    </edge>
+    <edge source="com.snail.factorymethod.demo1.LoggerFactory" target="com.snail.factorymethod.demo1.Logger" relationship="DEPENDENCY">
+      <point x="0.0" y="-28.0" />
+      <point x="271.9375" y="76.0" />
+      <point x="376.21875" y="76.0" />
+      <point x="376.21875" y="10.0" />
+      <point x="33.75" y="28.0" />
+    </edge>
+    <edge source="com.snail.factorymethod.demo1.FileLoggerFactory" target="com.snail.factorymethod.demo1.Logger" relationship="DEPENDENCY">
+      <point x="0.0" y="-40.0" />
+      <point x="68.0" y="270.0" />
+      <point x="68.0" y="55.0" />
+      <point x="359.96875" y="55.0" />
+      <point x="359.96875" y="10.0" />
+      <point x="33.75" y="28.0" />
+    </edge>
+    <edge source="com.snail.factorymethod.demo1.FileLoggerFactory" target="com.snail.factorymethod.demo1.LoggerFactory" relationship="REALIZATION">
+      <point x="61.333333333333314" y="-40.0" />
+      <point x="104.33333333333331" y="207.0" />
+      <point x="226.9375" y="207.0" />
+      <point x="-45.0" y="28.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="true" x="77.5" y="144.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
