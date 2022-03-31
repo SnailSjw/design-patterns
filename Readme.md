@@ -11,7 +11,7 @@
 2. Product（抽象产品角色）：工厂类创建的所有对象的父类，封装了各种产品对象的公有方法。
 3. ConcreteProduct（具体产品角色）：简单工厂模式的创建目标，所有被创建的对象都充当这个角色的某个具体的实例。它需要实现抽象产品角色的抽象方法。
 
-![image-20220329222845689](.\images\image-20220329222845689.png)
+![image-20220329222845689](https://gitee.com/snailjw/article-images/raw/master/typora/202203311134887.png)
 
 ### 创建对象与使用对象
 
@@ -80,7 +80,7 @@ Java中通常有以下几种创建对象的方式：
 
 工厂方法模式的结构如图：
 
-![image-20220330124911882](.\images\image-20220330124911882.png)
+![image-20220330124911882](https://gitee.com/snailjw/article-images/raw/master/typora/202203311134376.png)
 
 工厂方法模式包含4个角色：
 
@@ -134,7 +134,7 @@ public class ConcreteFactory implement Factory{
 
 **实例类图：**
 
-![image-20220330220150017](.\images\image-20220330220150017.png)
+![image-20220330220150017](https://gitee.com/snailjw/article-images/raw/master/typora/202203311135205.png)
 
 
 
@@ -154,7 +154,7 @@ public class ConcreteFactory implement Factory{
 
 **实现：**在工厂类中直接调用产品类的业务方法，客户端无须调用工厂方法创建产品对象，**直接使用工厂对象即可调用所创建的产品对象中的业务方法。**
 
-![image-20220330220412834](.\images\image-20220330220412834.png)
+![image-20220330220412834](https://gitee.com/snailjw/article-images/raw/master/typora/202203311135388.png)
 
 `LoggerFactory`代码修改如下：
 
@@ -216,7 +216,7 @@ public class Client {
 1. **产品等级结构：** **产品等级结构即产品的继承结构**，如：一个抽象类是电视机，其子类包括海尔电视，海信电视，TCL电视，则抽象电视机与具体品牌的电视机之间构成了一个产品等级结构，抽象电视机是父类，而具体品牌的电视机试其子类。
 2. **产品族：**在抽象工厂模式中，**产品族是指由同一个工厂生产的位于不同产品等级结构中的一组产品。**如下图示：
 
-![image-20220330203354559](.\images\image-20220330203354559.png)
+![image-20220330203354559](https://gitee.com/snailjw/article-images/raw/master/typora/202203311135957.png)
 
 ### 抽象工厂模式概述
 
@@ -242,7 +242,7 @@ public class Client {
 
 抽象工厂模式结构如图示：
 
-![image-20220330213008648](.\images\image-20220330213008648.png)
+![image-20220330213008648](https://gitee.com/snailjw/article-images/raw/master/typora/202203311135682.png)
 
 **抽象工厂模式的结构：**
 
@@ -285,11 +285,11 @@ public class ConcreteFactory1 implements AbstractFactory {
 
 某软件公司要开发一套界面皮肤库，可以对基于Java的桌面软件进行界面美化。用户在使用时可以通过菜单来选择皮肤，不同的皮肤将提供视觉效果不同的按钮、文本框、组合框等界面元素，例如春天(Spring)风格的皮肤将提供浅绿色的按钮、绿色边框的文本框和绿色边框的组合框，而夏天(Summer)风格的皮肤则提供浅蓝色的按钮、蓝色边框的文本框和蓝色边框的组合框，其结构示意图如下图所示：
 
-![image-20220330213743595](.\images\image-20220330213743595.png)
+![image-20220330213743595](https://gitee.com/snailjw/article-images/raw/master/typora/202203311135711.png)
 
 根据如上描述，结构图如下：
 
-![image-20220330213846205](.\images\image-20220330213846205.png)
+![image-20220330213846205](https://gitee.com/snailjw/article-images/raw/master/typora/202203311135014.png)
 
 具体代码实现参看项目模块：`abstract-factory-pattern`
 
@@ -347,5 +347,5 @@ public class ConcreteFactory1 implements AbstractFactory {
 
 链接：https://pan.baidu.com/s/1or3BVso4Cu638ZMRu-A75g 密码：d8e6
 
-![image-20220330202635590](.\images\image-20220330202635590.png)
+![image-20220330202635590](https://gitee.com/snailjw/article-images/raw/master/typora/202203311135346.png)
 
