@@ -1,4 +1,25 @@
 书籍《Java设计模式》-刘伟
+## 面向对象设计原则
+
+软件的可维护性（Maintainability）和可复用性（Reusability）是两个非常重要的用于衡量软件质量的属性，软件的可维护性是指软件能够被理解、改正、适应及扩展的难易程度，软件的可复用性是指软件能够被重复使用的难易程度。
+
+| 设计原则名称                                         | 定义                                                         |
+| ---------------------------------------------------- | ------------------------------------------------------------ |
+| 单一职责原则（Single Responsibility Principle，SRP） | 一个对象应该只包含单一的职责，并且该职责被完整地封装在一个类中 |
+| 开闭原则（Open-Closed Principle，OCP）               | 软件实体应当对扩展开放，对修改关闭                           |
+| 里氏代换原则（Liskov Substitution Principle，LSP）   | 所有引用基类的地方必须能透明地使用其子类的对象               |
+| 依赖倒转原则（Dependence Inversion Principle，DIP）  | 高层模块不应该依赖低层模块，它们都应该依赖抽象。抽象不应该依赖于细节，细节应该依赖于抽象 |
+| 接口隔离原则（Interface Segregation Principle，ISP） | 客户端不应该依赖那些它不需要的接口                           |
+| 合成复用原则（Composite Reuse Principle，CRP）       | 优先使用对象组合，而不是通过继承来达到复用的目的             |
+| 迪米特法则（Law of Demeter，LoD）                    | 每一个软件单位对其他单位都只有最少的知识，而且局限于那些与本单位密切相关的软件单位 |
+
+
+
+
+
+
+
+
 ## 简单工厂模式
 
 >简单工厂模式（Simple Factory Pattern）：定义一个工厂类，它可以根据参数的不同返回不同类的实例，被创建的实例通常都具有共同的父类。  
@@ -335,7 +356,464 @@ public class ConcreteFactory1 implements AbstractFactory {
 5. 抽象工厂模式适用于以下环境：一个系统不应当依赖于产品类实例如何被创建、组合和表达的细节；系统中有多于一个的产品族，而每次只使用其中某一产品族；属于同一个产品族的产品将在一起使用，这一约束必须在系统的设计中体现出来；产品等级结构稳定，在设计完成之后不会向系统中增加新的产品等级结构或者删除已有的产品等级结构。
 6. 抽象工厂模式以一种倾斜的方式来满足开闭原则。对于增加新的产品族，抽象工厂模式很好地支持了开闭原则；对于增加新的产品等级结构，需要修改所有的工厂角色，违背了开闭原则。
 
+## 建造者模式
 
+### 建造者模式概述
+
+建造者模式可以将部件本身和它们的组装过程分开，关注如何一步步创建一个包含多个组成部分的复杂对象，用户只需要指定复杂对象的类型即可得到该对象，而无须知道其内部的具体构造细节。
+
+> 建造者模式：将一个复杂对象的构建与它的标识分离，是的同样的构建过程可以创建不同的表示。
+
+建造者模式属于*对象创建型*模式
+
+关于定义的说明：
+
+* 将客户端与包含多个部件的复杂对象的创建过程分离。**客户端无需知道复杂对象的内部组成部分与装配方式**，只需要知道所需建造者的类型即可。
+* **关注如何逐步创建一个复杂的对象**，不同的建造者定义了不同的创建过程。
+
+### 建造者模式的结构与实现
+
+#### 建造者模式的结构：
+
+![image-20220411231810866](https://gitee.com/snailjw/article-images/raw/master/typora/202204112318935.png)
+
+#### 建造者模式包含的角色：
+
+* Builder（抽象建造者）
+* ConcreteBuilder（具体建造者）
+* Product（产品）
+* Director（指挥者）
+
+#### 建造者模式的实现
+
+典型的复杂对象类代码：
+
+```java
+public class Product {
+    private String partA;
+    private String partB;
+    private String partC;
+    //partA的Getter方法和Setter方法省略
+	//partB的Getter方法和Setter方法省略
+	//partC的Getter方法和Setter方法省略
+}
+```
+
+典型的抽象建造者类代码：
+
+```java
+public abstract class Builder {
+    //创建产品对象
+    protected Product product = new Product();
+    public abstract void buildPartA();
+    public abstract void buildPartB();
+    public abstract void buildPartC();
+    
+    //返回产品对象
+    public Product getResult(){
+        return product;
+    }
+}
+```
+
+典型的具体建造者类代码：
+
+```java
+public class ConcreteBuilder1 extends Builder {
+	public void buildPartA() {
+        product.setPartA("A1");
+    }
+
+    public void buildPartB() {
+        product.setPartB("B1");
+    }
+
+    public void buildPartC() {
+        product.setPartC("C1");
+    }
+}
+```
+
+典型的指挥者类代码：
+
+```java
+public class Director {
+    private Builder builder;
+    public Director(Builder builder) {
+        this.builder = builder;
+    }
+    public void setBuilder(Builder builder) {
+        this.builder = builder;
+    }
+    //产品构建与组装方法
+    public Product construct(){
+        builder.buildPartA();
+        builder.buildPartB();
+        builder.buildPartC();
+        return builder.getResult();
+    }
+}
+```
+
+客户类代码片段：
+
+```java
+	……
+    Builder builder = new ConcreteBuilder1(); //可通过配置文件实现
+	Director director = new Director(builder);
+	Product product = director.construct();
+    ……
+```
+
+### 建造者模式的应用实例
+
+实例说明：
+
+> 某游戏软件公司决定开发一款基于角色扮演的多人在线网络游戏，玩家可以在游戏中扮演虚拟世界中的一个特定角色，角色根据不同的游戏情节和统计数据（例如力量、魔法、技能等）具有不同的能力，角色也会随着不断升级而拥有更加强大的能力。
+>
+> 作为该游戏的一个重要组成部分，需要对游戏角色进行设计，而且随着该游戏的升级将不断增加新的角色。通过分析发现，游戏角色是一个复杂对象，它包含性别、面容等多个组成部分，不同类型的游戏角色，其性别、面容、服装、发型等外部特性都有所差异，例如“天使”拥有美丽的面容和披肩的长发，并身穿一袭白裙；而“恶魔”极其丑陋，留着光头并穿一件刺眼的黑衣。
+>
+> 无论是何种造型的游戏角色，它的创建步骤都大同小异，都需要逐步创建其组成部分，再将各组成部分装配成一个完整的游戏角色。现使用建造者模式来实现游戏角色的创建。
+
+实例类图：
+
+![image-20220412220455599](https://gitee.com/snailjw/article-images/raw/master/typora/202204122204664.png)
+
+实例代码：
+
+**(1) Actor**：游戏角色类，充当复杂产品对象
+
+**(2)** **ActorBuilder**：游戏角色建造者，充当抽象建造者
+
+**(3)** **HeroBuilder**：英雄角色建造者，充当具体建造者
+
+**(4)** **AngelBuilder**：天使角色建造者，充当具体建造者
+
+**(5)** **DevilBuilder**：恶魔角色建造者，充当具体建造者
+
+**(6)** **ActorController**：角色控制器，充当指挥者
+
+**(7) Client**：客户端测试类
+
+### 指挥者类的深入讨论
+
+1. 省略Director（省略指挥者类）
+
+  * 可以将**指挥者**类的逻辑在**抽象建造者**中实现
+
+    ```java
+    public abstract class ActorBuilder {
+        protected static Actor actor = new Actor();
+        
+        public abstract void buildType();
+        public abstract void buildSex();
+        public abstract void buildFace();
+        public abstract void buildCostume();
+        public abstract void buildHairstyle();
+     
+        //增加该方法(该方法原本在指挥者类中)
+        public static Actor construct(ActorBuilder ab) {
+            ab.buildType();
+            ab.buildSex();
+            ab.buildFace();
+            ab.buildCostume();
+            ab.buildHairstyle();
+            return actor;
+        }
+    }
+    ```
+
+    Client中调用改为：
+
+    ```java
+        ……
+        ActorBuilder ab;
+        ab = (ActorBuilder)XMLUtil.getBean();
+    
+        Actor actor;
+        actor = ActorBuilder.construct(ab);
+        ……
+    ```
+
+  * 将construct方法中的参数去掉，直接在construct()方法中调用buildPartX()方法。
+
+    ```java
+    public abstract class ActorBuilder {
+        protected Actor actor = new Actor();
+        
+        public abstract void buildType();
+        public abstract void buildSex();
+        public abstract void buildFace();
+        public abstract void buildCostume();
+        public abstract void buildHairstyle();
+    
+        public Actor construct() {
+            this.buildType();
+            this.buildSex();
+            this.buildFace();
+            this.buildCostume();
+            this.buildHairstyle();
+            return actor;
+        }
+    }
+    ```
+
+    Client中调用改为：
+
+    ```java
+        ……
+        ActorBuilder ab;
+        ab = (ActorBuilder)XMLUtil.getBean();
+    
+        Actor actor;
+        actor = ab.construct();
+        ……
+    ```
+
+2. 钩子方法的引入
+
+  * 钩子方法(Hook Method)：返回类型通常boolean类型，方法名一般为isXXX()
+
+    ```java
+    public abstract class ActorBuilder {
+        protected Actor actor = new Actor();
+        
+        public abstract void buildType();
+        public abstract void buildSex();
+        public abstract void buildFace();
+        public abstract void buildCostume();
+        public abstract void buildHairstyle();
+        
+        //钩子方法
+        public boolean isBareheaded() {
+            return false;
+        }
+        
+        public Actor createActor() {
+            return actor;
+        }
+    }
+    
+    ```
+
+    ```java
+    public class DevilBuilder extends ActorBuilder {
+        public void buildType() {
+            actor.setType("恶魔");
+        }
+    
+        public void buildSex() {
+            actor.setSex("妖");
+        }
+    
+        public void buildFace() {
+            actor.setFace("丑陋");
+        }
+    
+        public void buildCostume() {
+            actor.setCostume("黑衣");
+        }
+    
+        public void buildHairstyle() {
+            actor.setHairstyle("光头");
+        }
+    
+        //覆盖钩子方法
+        public boolean isBareheaded() {
+            return true;
+        }	
+    }
+    
+    ```
+
+    ```java
+    public class ActorController {
+        public Actor construct(ActorBuilder ab) {
+            Actor actor;
+            ab.buildType();
+            ab.buildSex();
+            ab.buildFace();
+            ab.buildCostume();
+            //通过钩子方法来控制产品的构建
+            if(!ab.isBareheaded()) {
+                ab.buildHairstyle();
+            }
+            actor=ab.createActor();
+            return actor;
+        }
+    }
+    ```
+
+### 建造者模式的优缺点与适用环境
+
+1. 模式优点
+
+  * 客户端不必知道产品内部组成的细节，**将产品本身与产品的创建过程解耦**，使得**相同的创建过程可以创建不同的产品对象**
+
+  * 每一个具体建造者都相对独立，与其他的具体建造者无关，因此**可以很方便地替换具体建造者或增加新的具体建造者**，扩展方便，**符合开闭原则**
+
+  * 可以**更加精细地控制产品的创建过程**
+
+2. 模式缺点
+
+  * 建造者模式所创建的产品一般具有较多的共同点，其组成部分相似，**如果产品之间差距性很大，不适合适用建造者模式**，因此其**使用范围受到一定的限制**。
+  * 如果**产品的内部变化复杂**，可能会**需要定义很多具体建造者类**来实现这种变化，导致系统变得很庞大，增加了系统的理解难度和运行成本。
+
+3. 模式适用环境
+
+  * **需要生成的产品对象有复杂的内部结构**，这些产品对象通常包含多个成员变量。
+  * **需要生成的产品对象的属性相互依赖**，需要指定其生成顺序。
+  * **对象的创建过程独立于创建该对象的类**。在建造者模式中通过引入了指挥者类，将创建过程封装在指挥者类中，而不在建造者类和客户类中。
+  * **隔离复杂对象的创建和使用**，并使得相同的创建过程可以创建不同的产品。
+
+
+
+## 原型模式
+
+### 原型模式概述
+
+通过复制一个**原型对象**得到多个与原型对象一模一样的新对象。
+
+原型模式的定义：
+
+> 原型模式：使用原型实例指定待创建对象的类型，并**通过复制这个原型来创建新的对象**。
+
+对定义的理解：
+
+* 属于**创建型**设计模式
+* **工作原理：**将一个原型对象传给要发动创建的对象（即客户端对象），这个要发动创建的对象**通过请求原型对象复制自己来实现创建过程**。
+* 创建新对象（也称为克隆对象）的**工厂**就是**原型类**自身，**工厂方法**由负责复制原型对象的**克隆方法**来实现
+* 通过克隆方法所创建的对象是**全新的对象**，它们在内存中拥有新的地址，每一个克隆对象都是**独立**的。
+* 通过不同的方式对克隆对象进行修改以后，**可以得到一系列相似但不完全相同的对象**
+
+### 原型模式的结构与实现
+
+#### 原型模式的结构
+
+类图结构：
+
+![image-20220412225301310](https://gitee.com/snailjw/article-images/raw/master/typora/202204122253375.png)
+
+原型模式包含以下3个角色：
+
+* Prototype（抽象原型类）
+* ConcretePrototype（具体原型类）
+* Client（客户类）
+
+#### 浅克隆与深克隆
+
+**浅克隆（Shallow Clone）：**当原型对象被赋值时，只复制它本身和其中包含的值类型的成员变量，而引用类型的成员变量并没有复制。
+
+![image-20220412225724060](https://gitee.com/snailjw/article-images/raw/master/typora/202204122257112.png)
+
+**深克隆（Deep Clone）：**除了对象本身被复制外，对象所包含的所有成员变量也将被复制。
+
+![image-20220412225823216](https://gitee.com/snailjw/article-images/raw/master/typora/202204122258272.png)
+
+#### 原型模式的实现
+
+**通用的克隆实现方法：**
+
+定义接口：
+
+```java
+public interface Prototype {
+    public Prototype clone();
+}
+```
+
+原型对象：
+
+```java
+public class ConcretePrototype implements Prototype {
+    private String attr; 
+
+    public void setAttr(String attr) {
+        this.attr = attr;
+    }
+
+    public String getAttr() {
+        return this.attr;
+    }
+
+    //克隆方法
+    public Prototype clone() {
+        Prototype prototype = new ConcretePrototype(); //创建新对象
+        prototype.setAttr(this.attr);
+        return prototype;
+    }
+}
+```
+
+调用：
+
+```java
+    ……
+    ConcretePrototype prototype = new ConcretePrototype();
+    prototype.setAttr("Sunny");
+    ConcretePrototype copy = (ConcretePrototype)prototype.clone();
+    ……
+```
+
+**原型模式的实现：**
+
+* Java语言中的clone()方法和Cloneable接口
+  * 在Java中，提供了一个`clone()`方法用于实现浅克隆，该方法使用起来很方便，直接调用`super.clone()`方法即可实现克隆。
+
+```java
+public class COncretePrototype implements Cloneable {
+    ……
+    // Shallow Clone
+    public Prototype clone(){
+        Object object = null;
+        try {
+            object = super.clone();
+        }catch (CloneNotSupportedException exception){
+            System.err.println("Not support cloneable");
+        }
+        return (Prototype)object;
+    }
+    ……
+}
+```
+
+调用：
+
+```java
+    ……
+	Prototype protptype = new ConcretePrototype();
+    Prototype copy = protptype.clone();
+    ……
+```
+
+### 原型模式的应用实例：
+
+实例说明：
+
+>在使用某OA系统时，有些岗位的员工发现他们每周的工作都大同小异，因此在填写工作周报时很多内容都是重复的，为了提高工作周报的创建效率，大家迫切希望有一种机制能够快速创建相同或者相似的周报，包括创建周报的附件。试使用原型模式对该OA系统中的工作周报创建模块进行改进。
+
+实例类图
+
+![image-20220412233217933](https://gitee.com/snailjw/article-images/raw/master/typora/202204122332010.png)
+
+**实例代码：**
+
+Object：抽象原型角色
+
+```java
+package java.lang;
+public class Object {
+    ……
+    protected native Object clone() throws CloneNotSupportedException;
+    ……
+}
+```
+
+**深克隆解决方案：**
+
+工作周报类WeeklyLog和附件类Attachmen实现Serializable接口
+
+![image-20220412234216464](https://gitee.com/snailjw/article-images/raw/master/typora/202204122342540.png)
 
 
 

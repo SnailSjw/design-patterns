@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans>
+    <bean id="hero" class="com.snail.demo1.HeroBuilder"></bean>
+    <bean id="angel" class="com.snail.demo1.AngelBuilder"></bean>
+    <bean id="devil" class="com.snail.demo1.DevilBuilder"></bean>
+</beans>

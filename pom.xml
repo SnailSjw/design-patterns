@@ -12,6 +12,8 @@
         <module>simple-factory-pattern</module>
         <module>factory-method-pattern</module>
         <module>abstract-factory-pattern</module>
+        <module>builder-pattern</module>
+        <module>prototype-pattern</module>
     </modules>
 
     <properties>
@@ -24,6 +26,11 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>5.7.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.20</version>
         </dependency>
     </dependencies>
 
